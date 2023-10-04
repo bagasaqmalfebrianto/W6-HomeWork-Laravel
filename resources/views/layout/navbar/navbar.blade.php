@@ -60,12 +60,13 @@
     <!-- Nav Item - User Information -->
     <li class="nav-item dropdown no-arrow">
     <div>
-        <form method="POST" action="{{ route('logout') }}">
+        <form method="POST" action="{{ route('logout') }}" id="logout-form">
             @csrf
-            <button type="submit" class="btn btn-link text-gray-600">
+            <button type="button" class="btn btn-link text-gray-600" onclick="confirmLogout()">
                 Logout
             </button>
         </form>
+
     </div>
 
         <!-- Dropdown - User Information -->
@@ -95,3 +96,10 @@
 
 </nav>
 <!-- End of Topbar -->
+<script>
+    function confirmLogout() {
+        if (confirm("Apakah anda yakin ingin logout?")) {
+            document.getElementById('logout-form').submit();
+        }
+    }
+</script>
