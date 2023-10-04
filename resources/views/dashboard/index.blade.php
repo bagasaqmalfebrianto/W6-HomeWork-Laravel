@@ -1,128 +1,82 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>User Profile</title>
-    <!-- Include Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="container mt-4">
-        <h1>INI SUDAH MASUK KE HALAMAN DASHBOARD</h1>
-        <h3>EDIT Profile</h3>
 
-        <!-- Profile Display Card -->
-        <div class="card mb-4">
-            <div class="card-body">
-                <h5 class="card-title">User Information</h5>
-                <p class="card-text"><strong>Nama:</strong> {{ $user->name }}</p>
-                <p class="card-text"><strong>Email:</strong> {{ $user->email }}</p>
-                <p class="card-text"><strong>No telpon:</strong> {{ $user->no_telp }}</p>
+@include('layout.head.head')
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                @include('layout.navbar.navbar')
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                @include('dashboard.dash')
+
+                </div>
+                <!-- /.container-fluid -->
+
             </div>
+            <!-- End of Main Content -->
+
+            @include('layout.footer.footer')
+
         </div>
+        <!-- End of Content Wrapper -->
 
-        <!-- Edit Profile Card -->
-        <div class="card mb-4">
-            <div class="card-header">{{ __('Edit Profile') }}</div>
-            <div class="card-body">
-            <form method="POST" action="{{ route('profile.update') }}">
-                            @csrf
-                            @method('PUT')
+    </div>
+    <!-- End of Page Wrapper -->
 
-                            <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nama') }}</label>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-                                <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>
-
-                                    @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', $user->email) }}" required autocomplete="email">
-
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="no_telp" class="col-md-4 col-form-label text-md-right">{{ __('No telpon') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="no_telp" type="text" class="form-control @error('no_telp') is-invalid @enderror" name="no_telp" value="{{ old('no_telp', $user->no_telp) }}" autocomplete="no_telp">
-
-                                    @error('no_telp')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-
-                            <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Update Profile') }}
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-            </div>
-        </div>
-
-        <!-- Edit Password Card -->
-        <div class="card">
-            <div class="card-header">{{ __('Change Password') }}</div>
-            <div class="card-body">
-            <form action="{{ route('profile.updatePassword') }}" method="POST">
-            @csrf
-            @method('PUT')
-
-            <div class="form-group">
-                <label for="current_password">Current Password</label>
-                <input type="password" name="current_password" id="current_password" class="form-control" required>
-                @error('current_password')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="form-group">
-                <label for="new_password">New Password</label>
-                <input type="password" name="new_password" id="new_password" class="form-control" required>
-                @error('new_password')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="form-group">
-                <label for="new_password_confirmation">Confirm New Password</label>
-                <input type="password" name="new_password_confirmation" id="new_password_confirmation" class="form-control" required>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Update Password</button>
-        </form>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Include Bootstrap JS (optional) -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+
 </body>
+
 </html>
