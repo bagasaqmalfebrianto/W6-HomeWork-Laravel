@@ -70,14 +70,16 @@ class DashboardController extends Controller
             'password'=>'required'
         ];
 
-        if($request->email != $dashboard->slug){
-            $rules['email']='required|unique:barangs';
+        if($request->email != $dashboard->email){
+            $rules['email']='required|unique:users';
         }
 
         $validatedData = $request->validate($rules);
 
 
         User::where('id',$dashboard->id)->update($validatedData);
+
+        return redirect('/dashboard');
     }
 
     /**
