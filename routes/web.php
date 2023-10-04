@@ -30,4 +30,14 @@ Route::resource('/login', loginController::class);
 
 
 //Dashboard
-Route::resource('/dashboard', DashboardController::class)->middleware('auth');
+
+Route::resource('/dashboard',DashboardController::class)->middleware('auth');
+
+
+//Logout
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'saldo'])->name('dashboard.saldo');
+});
+
