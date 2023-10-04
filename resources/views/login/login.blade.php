@@ -14,10 +14,10 @@
 </head>
 
 <body>
-  <div class="login-dark">
-    <form method="post" action="/login">
+    <div class="login-dark">
+        <form method="post" action="/login">
         @csrf
-        <div class="illustration">
+            <div class="illustration">
                 <h1 class="icon align-items-center font-weight-bolder text-gray-800">MoBank</h1>
             </div>
             <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email"></div>
