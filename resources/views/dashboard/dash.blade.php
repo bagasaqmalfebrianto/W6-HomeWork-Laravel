@@ -1,6 +1,6 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h1 my-3 text-gray-800 font-weight-light">Halo, <br>Selamat Datang</h1>
+    <h1 class="h1 my-3 text-gray-800 font-weight-light">Halo, <br>Selamat Datang {{ auth()->user()->name }}</h1>
     <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
             class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
 </div>
@@ -149,7 +149,7 @@
     <div class="col-md-3 mb-5">
         <div class="card border-bottom-info shadow h-100">
             <div class="card-body d-flex flex-column">
-                <a class="stretched-link" href="#!"></a>
+                <a class="stretched-link" href="/dashboard/{{ auth()->user()->id }}/edit"></a>
                 <img class = "img-fluid m-auto opacity-25" width = "70%" src = "{{ asset('assets/icons/user-pen-solid.svg') }}">
                 <h2 class="mt-auto card-title">Edit Akun</h2>
             </div>
