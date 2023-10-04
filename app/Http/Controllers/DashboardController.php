@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -46,17 +47,37 @@ class DashboardController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $dashboard)
     {
         //
+
+        return view('dashboard.edit',[
+            'user'=>$dashboard
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $dashboard)
     {
         //
+
+        $rules = [
+            'name'=>'required|max:255',
+            'no_telp'=>'required',
+            'alamat'=>'required',
+            'password'=>'required'
+        ];
+
+        if($request->email != $dashboard->slug){
+            $rules['email']='required|unique:barangs';
+        }
+
+        $validatedData = $request->validate($rules);
+
+
+        User::where('id',$dashboard->id)->update($validatedData);
     }
 
     /**
@@ -66,7 +87,7 @@ class DashboardController extends Controller
     {
         //
     }
-   
+
     public function saldo()
     {
         $user = Auth::user();
